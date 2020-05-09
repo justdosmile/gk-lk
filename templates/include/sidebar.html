@@ -5,8 +5,9 @@
         {% url 'all_verification' as all_verification %}
         {% url 'all_payment' as all_payment %}
         {% url 'feedback:feedback_admin' as all_support %}
+        {% url 'feedback:feedback_single' single_support.pk as one_feedback %}
     {% if perms.profile.views_profile %}
-        <li {% if all_user|active:request or all_verification|active:request or all_payment|active:request or all_support|active:request %} class="active" {% endif %}><a href="{% url 'all_user' %}">Администрирование</a></li>
+        <li {% if all_user|active:request or all_verification|active:request or all_payment|active:request or all_support|active:request or one_feedback|active:request %} class="active" {% endif %}><a href="{% url 'all_user' %}">Администрирование</a></li>
     {% endif %}
         {% url 'members_list' as members_list %}
         {% url 'partner_list' as partner_list %}
@@ -64,6 +65,7 @@
         <li {% if calculator|active:request %} class="active" {% endif %}><a href="{% url 'calculator' %}">Калькулятор</a></li>
         {% url 'news' as news %}
         {% url 'single_post' post.slug as single_post %}
-        <li {% if news|active:request or single_post|active:request %} class="active" {% endif %}><a href="{% url 'news' %}">Новости</a></li>
+        {% url 'add_post' as add_post %}
+        <li {% if news|active:request or single_post|active:request  or add_post|active:request %} class="active" {% endif %}><a href="{% url 'news' %}">Новости</a></li>
     </ul>
 </nav>

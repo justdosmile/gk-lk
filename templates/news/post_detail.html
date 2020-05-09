@@ -21,8 +21,8 @@
         </h1>
         <div class="content-body">
             <div class="news-block-one">
-                {% if new.image %}
-                    <div class="news-img-one" style="background-image: url({{ new.image.url }});"></div>
+                {% if post.image %}
+                    <div class="news-img-one" style="background-image: url({{ post.image.url }});"></div>
                 {% else %}
                     <div class="news-img-one" style="background-image: url(/static/img/s1200.jpeg);"></div>
                 {% endif %}
