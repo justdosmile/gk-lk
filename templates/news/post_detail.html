@@ -30,6 +30,7 @@
                     {{ post.text|safe }}
                 </div>
             </div>
+{#        <input type="checkbox" name="published" {% if article.published %}checked{% endif %} />#}
             {% if post.published_date %}
                 <span class="newsdate">{{ post.published_date }}</span>
             {% else %}

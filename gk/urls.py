@@ -5,11 +5,11 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('news/', include('backend.news.urls')),
     path('calculator/', include('backend.calculator.urls')),
     path('accounts/', include('allauth.urls')),
     path('feedback/', include('backend.feedback.urls')),
-    path('', include('backend.profile.urls')),
+    path('profile/', include('backend.profile.urls')),
+    path('', include('backend.news.urls')),
 ]
 
 if settings.DEBUG:

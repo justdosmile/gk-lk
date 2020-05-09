@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+from backend.news.gen_slug import gen_slug
+
 
 def get_path_img(instanse, file):
 
@@ -30,7 +32,7 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
-        ordering = ["-created_date"]
+        ordering = ["-id"]
 
     def publish(self):
         self.published_date = timezone.now()
@@ -38,6 +40,12 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("single_post", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        # при создании новости в шаблоне создаем slug
+        if not self.id:
+            self.slug = gen_slug(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

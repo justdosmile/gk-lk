@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+        <div class="content">
+            <h1>
+                Добавление новой статьи
+            </h1>
+
+            <div class="content-body">
+
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                {#  {% if redirect_field_value %}#}
+                {#  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />#}
+                {#  {% endif %}#}
+                    <input type="submit" value="Добавить статью" class="savebut">
+                </form>
+            </div>
+        </div>
+
+{% endblock %}
