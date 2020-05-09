@@ -7,6 +7,6 @@
     <li {% if all_verification|active:request %} class="active" {% endif %}><a href="{% url 'all_verification' %}">Ожидающие верификацию</a></li>
     {% url 'all_payment' as all_payment %}
     <li {% if all_payment|active:request %} class="active" {% endif %}><a href="{% url 'all_payment' %}">Подтверждение платежей</a></li>
-    {% url 'all_support' as all_support %}
-    <li {% if all_support|active:request %} class="active" {% endif %}><a href="{% url 'all_support' %}">Техподдержка</a></li>
+    {% url 'feedback:feedback_admin' as all_support %}
+    <li {% if all_support|active:request %} class="active" {% endif %}><a href="{% url 'feedback:feedback_admin' %}">Техподдержка</a></li>
 </ul>

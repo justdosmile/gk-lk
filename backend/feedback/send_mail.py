@@ -39,10 +39,14 @@ def send_mail_feedback(user):
         return True
     except BadHeaderError:
         return False
-    # subject = 'Новый запрос в поддержку'
-    # message = 'Здравствуйте, пользователь {}, отправил запрос в поддержку'.format(user)
-    # try:
-    #     send_mail(subject, message, 'hamell1987@gmail.com', ['hamell1987@gmail.com'])
-    #     return True
-    # except BadHeaderError:
-    #     return False
+
+
+# def send_mail_answer(massage, mail):
+#     """Ответ на email пользователя от поддержки"""
+#     subject = 'Ответ на Ваше обращение в техподдержку'
+#     message = massage
+#     try:
+#         send_mail(subject, message, 'dimmoon@mail.ru', [mail])
+#         return True
+#     except BadHeaderError:
+#         return False

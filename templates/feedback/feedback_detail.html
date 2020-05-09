@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mobile %}
+    <!-- Меню и заголовок для мобилы -->
+    <div class="const mobile-nav">
+        <a href="javascript:;" class="menu-open"></a>
+        <h1>
+            Техподдержка  <!-- Дублировал для мобильной версии -->
+        </h1>
+    </div>
+    <!-- /Меню и заголовок для мобилы -->
+{% endblock mobile %}
+
+
+{% block content %}
+    <div class="content">
+        <h1>
+            Техподдержка
+        </h1>
+
+        {% include 'include/admin_menu.html' %}
+
+        <div class="content-body">
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <td>ФИО</td>
+                        <td>Дата вопроса</td>
+                        <td>Заголовок вопроса</td>
+                        <td>Вопрос</td>
+                        <td>Статус</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ single_support.user }}</td>
+                        <td>{{ single_support.date }}</td>
+                        <td>{{ single_support.title }}</td>
+                        <td>{{ single_support.text }}</td>
+                        {% if single_support.processing == False %}
+                            <td>В ожидании</td>
+                        {% else %}
+                            <td>Рассмотрено</td>
+                        {% endif %}
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br><br>
+            <form action="">
+                <label>Ответ</label>
+                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <input type="button" value="Ответить" class="savebut" style="margin-right:20px">
+            </form>
+        </div>
+    </div>
+{% endblock content %}
