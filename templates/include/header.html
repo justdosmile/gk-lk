@@ -11,13 +11,10 @@
             {% endif %}
         </div>
         <div class="head-info">
-            {% if user.is_superuser %}
-                Статус: <b>администратор</b>
-            {% else %}
+            {% if perms.profile.shareholder %}
                 <span>Внесено средств: 1 500 000₽</span><br>
-                Статус: <b>кандидат в пайщики</b>
             {% endif %}
-
+                Статус: <b>{{ user.groups.all.0 }}</b>
         </div>
         <a href="{% url 'account_logout' %}" class="exit-link">
             <svg xmlns="http://www.w3.org/2000/svg" height="512px" viewBox="0 -10 490.66667 490" width="512px">

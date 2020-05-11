@@ -4,9 +4,9 @@ from backend.feedback import views
 
 app_name = "feedback"
 urlpatterns = [
-    path("create/", views.FeedbackCreate.as_view(), name="create"),
-    path("single_support/<int:pk>/", views.FeedbackDetail.as_view(), name="feedback_single"),
-    path("all_support/", views.FeedbackAdminList.as_view(), name="feedback_admin"),
-    path("search/", views.SearchFeedback.as_view(), name="feedback_search"),
-    path("", views.FeedbackList.as_view(), name="feedback"),
+    path("create/", views.FeedbackCreateView.as_view(), name="create"),
+    path("single_support/<int:pk>/", views.FeedbackDetailView.as_view(), name="feedback_single"),
+    path("all_support/", views.FeedbackAdminListView.as_view(), name="feedback_admin"),
+    path("search/", views.SearchFeedbackView.as_view(), name="feedback_search"),
+    path("", views.FeedbackListView.as_view(), name="feedback"),
 ]

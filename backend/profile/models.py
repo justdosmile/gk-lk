@@ -4,6 +4,18 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 
+# class ServiceGroup(models.Model):
+#     """Группы"""
+#     name = models.CharField("Группа", max_length=50)
+#
+#     def __str__(self):
+#         return self.name
+#
+#     class Meta:
+#         verbose_name = "Группа"
+#         verbose_name_plural = "Группы"
+
+
 class Profile(models.Model):
     """Профиль"""
 
@@ -49,6 +61,7 @@ class Profile(models.Model):
     installment_period = models.DateTimeField("Срок рассрочки", blank=True, null=True)
     percent_installment = models.IntegerField("Процент рассрочки", blank=True, null=True)
     number_score = models.CharField("Номер счета", max_length=15, blank=True, null=True)
+    # service_group =
 
     def __str__(self):
         return "{}".format(self.user)
@@ -56,6 +69,15 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Профиль"
         verbose_name_plural = "Профили"
+        permissions = [
+            ("administrator", "Администратор"),
+            ("candidate_in_shareholder", "Кандидат в пайщики"),
+            ("shareholder", "Пайщик"),
+            ("distributor_one", "Распространитель1"),
+            ("distributor_two", "Распространитель2"),
+            ("distributor_three", "Распространитель3"),
+            ("locked", "Заблокированные"),
+        ]
 
 
 class AbstractAddressModel(models.Model):

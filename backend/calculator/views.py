@@ -1,13 +1,13 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
 
 from backend.calculator.models import Calculator
 
 
-class CalculatorView(LoginRequiredMixin, ListView):
+class CalculatorView(PermissionRequiredMixin, ListView):
     """Калькулятор"""
     model = Calculator
     template_name = "pages/calculator.html"
@@ -16,6 +16,13 @@ class CalculatorView(LoginRequiredMixin, ListView):
         context = super().get_context_data(*args, **kwargs)
         context["programs"] = Calculator.objects.all()
         return context
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator') or user.has_perm('profile.distributor_one') or user.has_perm('profile.distributor_two') or user.has_perm('profile.distributor_three') or user.has_perm('profile.shareholder') or user.has_perm('profile.candidate_in_shareholder')
+
+    def handle_no_permission(self):
+        return redirect('/')
 
 
 def answer_me(request):

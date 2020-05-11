@@ -2,9 +2,9 @@
 
 <div class="content">
     <h1>
-        Новости
+        Новости   - ({{ user.groups.all.0 }})
     </h1>
-    {% if user.is_superuser %}
+    {% if perms.profile.administrator %}
         <ul class="pages-menu">
             <li class="active"><a href="{% url 'add_post' %}">Добавить статью</a></li>
         </ul>
