@@ -1,80 +1,80 @@
-{% extends 'base.html' %}
-
-{% block mobile %}
-	<!-- Меню и заголовок для мобилы -->
-	<div class="const mobile-nav">
-		<a href="javascript:;" class="menu-open"></a>
-		<h1>
-			Служба поддержки  <!-- Дублировал для мобильной версии -->
-		</h1>
-	</div>
-	<!-- /Меню и заголовок для мобилы -->
-{% endblock mobile %}
-
-
-{% block content %}
-			<div class="content">
-				<h1>
-					Служба поддержки
-				</h1>
-
-
-				<div class="content-body">
-<form action="">
-<label>Заголовок вопроса:</label>
-<input type="text" placeholder="Макс. 50 символов"><br>
-<label>Содержание вопроса:</label><br>
-<textarea name="" id="" placeholder="А вот тут максимально подробно"></textarea>
-<label>Приложите фото/скриншот:</label><br><br>
-<div class="file-inp">
-	<label><input type="file" name="file"><span>Выберите файл</span></label>
-</div>
-<input type="button" value="Отправить запрос" class="savebut">
-</form>
-	<div class="info"><img src="img/information.svg" alt="">Отправлено в службу поддержки</div>
-	<div class="error"><img src="img/error.svg" alt="">Ошибка отправки. Не заполнено содержание вопроса</div>
-
-
-	<div class="table">
-		<table>
-			<thead>
-				<tr>
-					<td>Заголовок вопроса</td>
-					<td>Содержание вопроса</td>
-					<td>Дата</td>
-					<td>Ответ</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Помогите хелп</td>
-					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>
-					<td>22.02,2020</td>
-					<td style="max-width:300px;"><span style="color:blue">В обработке</span></td>
-				</tr>
-				<tr>
-					<td>Помогите хелп</td>
-					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>
-					<td>22.02,2020</td>
-					<td><span style="color:blue">В обработке</span></td>
-				</tr>
-				<tr>
-					<td>Помогите хелп</td>
-					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>
-					<td>22.02,2020</td>
-					<td><span style="color:blue">В обработке</span></td>
-				</tr>
-				<tr>
-					<td>Помогите хелп</td>
-					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>
-					<td>22.02,2020</td>
-					<td><span style="color:blue">В обработке</span></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-				</div>
-
-			</div>
-	{% endblock content %}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block mobile %}#}
+{#	<!-- Меню и заголовок для мобилы -->#}
+{#	<div class="const mobile-nav">#}
+{#		<a href="javascript:;" class="menu-open"></a>#}
+{#		<h1>#}
+{#			Служба поддержки  <!-- Дублировал для мобильной версии -->#}
+{#		</h1>#}
+{#	</div>#}
+{#	<!-- /Меню и заголовок для мобилы -->#}
+{#{% endblock mobile %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#			<div class="content">#}
+{#				<h1>#}
+{#					Служба поддержки#}
+{#				</h1>#}
+{##}
+{##}
+{#				<div class="content-body">#}
+{#<form action="">#}
+{#<label>Заголовок вопроса:</label>#}
+{#<input type="text" placeholder="Макс. 50 символов"><br>#}
+{#<label>Содержание вопроса:</label><br>#}
+{#<textarea name="" id="" placeholder="А вот тут максимально подробно"></textarea>#}
+{#<label>Приложите фото/скриншот:</label><br><br>#}
+{#<div class="file-inp">#}
+{#	<label><input type="file" name="file"><span>Выберите файл</span></label>#}
+{#</div>#}
+{#<input type="button" value="Отправить запрос" class="savebut">#}
+{#</form>#}
+{#	<div class="info"><img src="img/information.svg" alt="">Отправлено в службу поддержки</div>#}
+{#	<div class="error"><img src="img/error.svg" alt="">Ошибка отправки. Не заполнено содержание вопроса</div>#}
+{##}
+{##}
+{#	<div class="table">#}
+{#		<table>#}
+{#			<thead>#}
+{#				<tr>#}
+{#					<td>Заголовок вопроса</td>#}
+{#					<td>Содержание вопроса</td>#}
+{#					<td>Дата</td>#}
+{#					<td>Ответ</td>#}
+{#				</tr>#}
+{#			</thead>#}
+{#			<tbody>#}
+{#				<tr>#}
+{#					<td>Помогите хелп</td>#}
+{#					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>#}
+{#					<td>22.02,2020</td>#}
+{#					<td style="max-width:300px;"><span style="color:blue">В обработке</span></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Помогите хелп</td>#}
+{#					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>#}
+{#					<td>22.02,2020</td>#}
+{#					<td><span style="color:blue">В обработке</span></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Помогите хелп</td>#}
+{#					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>#}
+{#					<td>22.02,2020</td>#}
+{#					<td><span style="color:blue">В обработке</span></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Помогите хелп</td>#}
+{#					<td>Хотелось бы узнать как зарегистрировать домашнего питомца?</td>#}
+{#					<td>22.02,2020</td>#}
+{#					<td><span style="color:blue">В обработке</span></td>#}
+{#				</tr>#}
+{#			</tbody>#}
+{#		</table>#}
+{#	</div>#}
+{##}
+{#				</div>#}
+{##}
+{#			</div>#}
+{#	{% endblock content %}#}

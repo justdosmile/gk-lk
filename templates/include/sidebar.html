@@ -1,6 +1,7 @@
 {% load link_tags %}
 <nav>
     <ul>
+<!--Администрирование-->
     {% if perms.profile.administrator %}
         {% url 'all_user' as all_user %}
         {% url 'all_verification' as all_verification %}
@@ -9,6 +10,7 @@
         {% url 'feedback:feedback_single' single_support.pk as one_feedback %}
         <li {% if all_user|active:request or all_verification|active:request or all_payment|active:request or all_support|active:request or one_feedback|active:request %} class="active" {% endif %}><a href="{% url 'all_user' %}">Администрирование</a></li>
     {% endif %}
+<!--Очередь-->
         {% url 'members_list' as members_list %}
         {% url 'partner_list' as partner_list %}
         {% url 'turn_list' as turn_list %}
@@ -18,6 +20,7 @@
     {% if perms.profile.administrator or perms.profile.distributor_one or perms.profile.distributor_two or perms.profile.distributor_three %}
         <li {% if members_list|active:request or partner_list|active:request or turn_list|active:request or deal_list|active:request or calculated_list|active:request or debtor_list|active:request %} class="active" {% endif %}><a href="{% url 'members_list' %}">Очередь</a></li>
     {% endif %}
+<!--Документы-->
     {% if perms.profile.administrator or perms.profile.candidate_in_shareholder or perms.profile.shareholder %}
         <li>
             <a href="javascript:;" class="mainitem">Документы<span class="dropdown"></span></a>
@@ -33,6 +36,7 @@
             </ul>
         </li>
     {% endif %}
+<!--Взносы-->
     {% if perms.profile.administrator or perms.profile.shareholder %}
         <li>
             <a href="javascript:;" class="mainitem">Взносы<span class="dropdown"></span></a>
@@ -47,10 +51,12 @@
             </ul>
         </li>
     {% endif %}
+<!--Профиль-->
     {% if perms.profile.administrator or perms.profile.candidate_in_shareholder or perms.profile.shareholder or perms.profile.distributor_one or perms.profile.distributor_two or perms.profile.distributor_three %}
         {% url 'profile' as profile %}
         <li {% if profile|active:request %} class="active" {% endif %}><a href="{% url 'profile' %}">Профиль</a></li>
     {% endif %}
+<!--Распространение-->
     {% if perms.profile.administrator or perms.profile.distributor_one or perms.profile.distributor_two or perms.profile.distributor_three %}
         <li>
             <a href="javascript:;" class="mainitem">Распространение<span class="dropdown"></span></a>
@@ -62,17 +68,22 @@
             </ul>
         </li>
     {% endif %}
+<!--Поддержка-->
     {% if perms.profile.candidate_in_shareholder or perms.profile.shareholder or perms.profile.distributor_one or perms.profile.distributor_two or perms.profile.distributor_three or perms.profile.locked %}
         {% url 'feedback:feedback' as support %}
         <li {% if support|active:request %} class="active" {% endif %}><a href="{% url 'feedback:feedback' %}">Поддержка</a></li>
     {% endif %}
+<!--Калькулятор-->
     {% if perms.profile.administrator or perms.profile.candidate_in_shareholder or perms.profile.shareholder or perms.profile.distributor_one or perms.profile.distributor_two or perms.profile.distributor_three %}
         {% url 'calculator' as calculator %}
         <li {% if calculator|active:request %} class="active" {% endif %}><a href="{% url 'calculator' %}">Калькулятор</a></li>
     {% endif %}
+<!--Новости-->
         {% url 'news' as news %}
         {% url 'single_post' post.slug as single_post %}
         {% url 'add_post' as add_post %}
-        <li {% if news|active:request or single_post|active:request  or add_post|active:request %} class="active" {% endif %}><a href="{% url 'news' %}">Новости</a></li>
+        {% url 'update_post' post.slug as update_post %}
+        {% url 'delete_post' post.slug as delete_post %}
+        <li {% if news|active:request or single_post|active:request or add_post|active:request  or update_post|active:request or delete_post|active:request %} class="active" {% endif %}><a href="{% url 'news' %}">Новости</a></li>
     </ul>
 </nav>

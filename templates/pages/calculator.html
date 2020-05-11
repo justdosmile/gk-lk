@@ -36,22 +36,22 @@
                     <input type="number" name="" id="input_period" value="120" max="120"><label>месяцев</label>
                 </div>
                 <div>
-                    <label>Вступительный взнос:</label><input type="text" id="vstup_vznos" value="" disabled><label>₽</label>
+                    <label>Вступительный взнос:</label><input type="text" id="vstup_vznos" value="" style="background: #efefef" disabled><label>₽</label>
                 </div>
                 <div>
-                    <label>Ежемесячный членский взнос:</label><input type="text" id="mounth_vznos" value="" disabled><label>₽</label>
+                    <label>Ежемесячный членский взнос:</label><input type="text" id="mounth_vznos" value="" style="background: #efefef" disabled><label>₽</label>
                 </div>
                 <div>
-                    <label>Минимальный ежемесячный паевый взнос:</label><input type="text" id="paev_vznos" value="" disabled><label>₽</label>
+                    <label>Минимальный ежемесячный паевый взнос:</label><input type="text" id="paev_vznos" value="" style="background: #efefef" disabled><label>₽</label>
                 </div>
                 <div>
-                    <label>Переплата при ипотечном кредитовании:</label><input type="text" id="percent_mortgage" value="" disabled><label>₽</label>
+                    <label>Переплата при ипотечном кредитовании:</label><input type="text" id="percent_mortgage" value="" style="background: #efefef" disabled><label>₽</label>
                 </div>
                 <input type="button" value="Рассчитать" class="savebut" id="sender">
             </form>
 
-            <div class="info"><img src="{% static 'img/information.svg' %}" alt="">Расчет произведен</div>
-            <div class="error"><img src="{% static 'img/error.svg' %}" alt="">Ошибка рассчета. Проверьте правильность введенных данных.</div>
+{#            <div class="info"><img src="{% static 'img/information.svg' %}" alt="">Расчет произведен</div>#}
+{#            <div class="error"><img src="{% static 'img/error.svg' %}" alt="">Ошибка рассчета. Проверьте правильность введенных данных.</div>#}
 
             <div class="table calcul-table" id="print-content">
 

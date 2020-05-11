@@ -29,11 +29,13 @@ urlpatterns = [
     path("hierarchy/", views.HierarchyView.as_view(), name="hierarchy"),
     path("invitation/", views.LinkInvitationView.as_view(), name="invitation"),
 
-    path("support/", views.SupportView.as_view(), name="support"),
+    # path("support/", views.SupportView.as_view(), name="support"),
 
     path("all_user/", views.AdminAllUserView.as_view(), name="all_user"),
     path("all_verification/", views.AdminAllVerificationView.as_view(), name="all_verification"),
     path("all_payment/", views.AdminAllPaymentView.as_view(), name="all_payment"),
+    path("admin_search/", views.SearchAdminView.as_view(), name="admin_search"),
+    path("turn_search/", views.SearchTurnView.as_view(), name="turn_search"),
     # path("all_support/", views.AdminAllSupportView.as_view(), name="all_support"),
     path("", views.ProfileView.as_view(), name="profile"),
 ]

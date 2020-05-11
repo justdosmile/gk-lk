@@ -22,6 +22,10 @@
         {% include 'include/turn_menu.html' %}
 
         <div class="content-body">
+            <form method="get" action="{% url 'turn_search' %}" class="search-inp">
+                <input type="text" placeholder="Введите ФИО члена" name="partner">
+                <input type="submit" value="" class="searchbut">
+            </form>
             <table>
                 <thead>
                 <tr>
@@ -36,8 +40,8 @@
                 {% for member in object_list %}
                     <tbody>
                     <tr>
-                        <td>{{ member.user }}</td>
-                        <td>{{ member.user.date_joined }}</td>
+                        <td>{{ member.profile.full_name }}</td>
+                        <td>{{ member.date_joined }}</td>
                         <td>{{ member.date_joined }}</td>
                         <td>{{ member.accumulated_queue }}</td>
                         <td>{{ member.left_queue }}</td>
@@ -52,9 +56,9 @@
             </table>
         </div>
 
-        {% if is_paginated %}
+
             {% include 'include/pagination.html' %}
-        {% endif %}
+
 
     </div>
 {% endblock %}

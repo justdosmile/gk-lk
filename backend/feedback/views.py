@@ -1,10 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import User, Permission
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic.base import View
 
 from .models import Feedback
 from .forms import FeedbackForm
+from ..profile.models import Profile
 
 
 class FeedbackListView(LoginRequiredMixin, ListView):
@@ -51,20 +54,20 @@ class FeedbackDetailView(PermissionRequiredMixin, DetailView):
         return redirect('/')
 
 
-class SearchFeedbackView(PermissionRequiredMixin, ListView):
-    """Поиск пользователей по ФИО в адменистрированнии"""
-    paginate_by = 5
-    template_name = "administrirovanie/admin-support.html"
-
-    def get_queryset(self):
-        return Feedback.objects.filter(user__username__icontains=self.request.GET.get('qus'))
-
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
-
-    def handle_no_permission(self):
-        return redirect('/')
+# class SearchFeedbackView(PermissionRequiredMixin, ListView):
+    # """Поиск пользователей по ФИО в адменистрированнии"""
+    # paginate_by = 5
+    # template_name = "administrirovanie/admin-support.html"
+    #
+    # def get_queryset(self):
+    #     return Feedback.objects.filter(user__profile__full_name__icontains=self.request.GET.get('qus'))
+    #
+    # def has_permission(self):
+    #     user = self.request.user
+    #     return user.has_perm('profile.administrator')
+    #
+    # def handle_no_permission(self):
+    #     return redirect('/')
 
 
 class FeedbackCreateView(LoginRequiredMixin, CreateView):

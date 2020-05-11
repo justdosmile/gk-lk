@@ -23,6 +23,10 @@
         {% include 'include/turn_menu.html' %}
 
         <div class="content-body">
+            <form method="get" action="{% url 'turn_search' %}" class="search-inp">
+                <input type="text" placeholder="Введите ФИО члена" name="turn">
+                <input type="submit" value="" class="searchbut">
+            </form>
             <table>
                 <thead>
                 <tr>
@@ -43,9 +47,9 @@
             </table>
         </div>
 
-        {% if is_paginated %}
+
             {% include 'include/pagination.html' %}
-        {% endif %}
+
 
     </div>
 {% endblock %}

@@ -22,10 +22,10 @@
 
 
 <div class="content-body">
-<form action="" class="search-inp">
-<input type="text" placeholder="Введите ФИО члена">
-<input type="button" value="" class="searchbut">
-</form>
+    <form method="get" action="{% url 'admin_search' %}" class="search-inp">
+        <input type="text" placeholder="Введите ФИО члена" name="all">
+        <input type="submit" value="" class="searchbut">
+    </form>
 
 
 	<div class="table">
@@ -38,80 +38,19 @@
 				</tr>
 			</thead>
 			<tbody>
+            {% for member in object_list %}
 				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
+					<td>{{ member.full_name }} <a href="#" class="edit"></a></td>
+					<td>{{ member.user.date_joined }}</td>
+					<td>{{ member.user.groups.all.0 }}</td>
 				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
-				<tr>
-					<td>Иванов Аркадий Иванович <a href="#" class="edit"></a></td>
-					<td>29.03.2020</td>
-					<td>Кандидат в пайщики</td>
-				</tr>
+            {% endfor %}
 			</tbody>
 		</table>
 	</div>
 
 				</div>
-				<div class="paginator">
-					<a href="" class="page-prev"></a>
-					<a href="">1</a>
-					<a href="">2</a>
-					<a href="" class="active">3</a>
-					<a href="">4</a>
-					<a href="">5</a>
-					<a href="" class="page-next"></a>
-				</div>
+				{% include 'include/pagination.html' %}
 
 			</div>
 

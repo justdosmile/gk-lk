@@ -41,7 +41,7 @@ class Feedback(models.Model):
     class Meta:
         verbose_name = "Обратная связь"
         verbose_name_plural = "Обратные связи"
-        ordering = ["-date"]
+        ordering = ["-id"]
 
 
 # @receiver(post_save, sender=Feedback)

@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.models import Permission, User
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
 
 from .forms import UpdateAddressRegistrationForm, UpdateAddressActualForm
 from .models import Profile, AddressRegistration, AddressActual
+from ..feedback.models import Feedback
 
 
 class TurnView(PermissionRequiredMixin, ListView):
@@ -47,7 +49,8 @@ class PartnerCollectiveView(PermissionRequiredMixin, ListView):
     template_name = "turn/partner_list.html"
 
     def get_queryset(self):
-        return Profile.objects.all()
+        perm = Permission.objects.get(codename='shareholder')
+        return User.objects.filter(groups__permissions=perm)
 
     def has_permission(self):
         user = self.request.user
@@ -55,13 +58,6 @@ class PartnerCollectiveView(PermissionRequiredMixin, ListView):
 
     def handle_no_permission(self):
         return redirect('/')
-
-    # def has_permission(self):
-    #     user = self.request.user
-    #     return user.has_perm('profile.shareholder')
-    #
-    # def handle_no_permission(self):
-    #     return redirect('/')
 
 
 class DealView(PermissionRequiredMixin, ListView):
@@ -129,7 +125,7 @@ class ProfileView(PermissionRequiredMixin, DetailView):
         return redirect('/')
 
 
-class CreateAddressView(View):
+class CreateAddressView(PermissionRequiredMixin, View):
     """Создаем или обновляем адреса"""
 
     def post(self, request):
@@ -164,6 +160,13 @@ class CreateAddressView(View):
                                                      })
                 messages.success(self.request, f'Изменения сохранены')
                 return redirect('/profile/')
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator') or user.has_perm('profile.distributor_one') or user.has_perm('profile.distributor_two') or user.has_perm('profile.distributor_three') or user.has_perm('profile.shareholder') or user.has_perm('profile.candidate_in_shareholder')
+
+    def handle_no_permission(self):
+        return redirect('/')
 
 
 # -? для теста
@@ -320,14 +323,13 @@ class LinkInvitationView(PermissionRequiredMixin, ListView):
         return redirect('/')
 
 
-# -? для теста
-class SupportView(LoginRequiredMixin, ListView):
-    """Поддержка"""
-    model = Profile
-    template_name = "pages/support.html"
+# # -? для теста
+# class SupportView(LoginRequiredMixin, ListView):
+#     """Поддержка"""
+#     model = Profile
+#     template_name = "pages/support.html"
 
 
-# -? для теста
 class AdminAllUserView(PermissionRequiredMixin, ListView):
     """Админка все пользователи"""
     model = Profile
@@ -343,9 +345,12 @@ class AdminAllUserView(PermissionRequiredMixin, ListView):
 
 # -? для теста
 class AdminAllVerificationView(PermissionRequiredMixin, ListView):
-    """Админка верификация пользователей"""
-    model = Profile
+    """Админка ожидающие верификацию пользователи"""
     template_name = "administrirovanie/admin-verif.html"
+
+    def get_queryset(self):
+        perm = Permission.objects.get(codename='candidate_in_shareholder')
+        return User.objects.filter(groups__permissions=perm)
 
     def has_permission(self):
         user = self.request.user
@@ -358,8 +363,11 @@ class AdminAllVerificationView(PermissionRequiredMixin, ListView):
 # -? для теста
 class AdminAllPaymentView(PermissionRequiredMixin, ListView):
     """Админка подтверждение платежей"""
-    model = Profile
     template_name = "administrirovanie/admin-podtv.html"
+
+    def get_queryset(self):
+        perm = Permission.objects.get(codename='shareholder')
+        return User.objects.filter(groups__permissions=perm)
 
     def has_permission(self):
         user = self.request.user
@@ -368,10 +376,61 @@ class AdminAllPaymentView(PermissionRequiredMixin, ListView):
     def handle_no_permission(self):
         return redirect('/')
 
-# # -? для теста
-# class AdminAllSupportView(PermissionRequiredMixin, ListView):
-#     """Админка техподдержка"""
-#     model = Profile
-#     template_name = "administrirovanie/admin-support.html"
-#     permission_required = "profile.view_profile"
+
+# надо поработать над пагинатором но это не точно)
+class SearchAdminView(PermissionRequiredMixin, View):
+    """Админка Поиск пользователей по ФИО """
+
+    def get(self, request):
+        if self.request.GET.get('all'):
+            all_users = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('all'))}
+            return render(self.request, 'administrirovanie/admin-allusers.html', all_users)
+        elif self.request.GET.get('verif'):
+            verification = {'object_list': User.objects.filter(groups__permissions=Permission.objects.get(codename='candidate_in_shareholder'), profile__full_name__icontains=self.request.GET.get('verif'))}
+            return render(self.request, 'administrirovanie/admin-verif.html', verification)
+        elif self.request.GET.get('podtv'):
+            paying = {'object_list': User.objects.filter(groups__permissions=Permission.objects.get(codename='shareholder'), profile__full_name__icontains=self.request.GET.get('podtv'))}
+            return render(self.request, 'administrirovanie/admin-podtv.html', paying)
+        elif self.request.GET.get('qus'):
+            support = {'object_list': Feedback.objects.filter(user__profile__full_name__icontains=self.request.GET.get('qus'))}
+            return render(self.request, 'administrirovanie/admin-support.html', support)
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator')
+
+    def handle_no_permission(self):
+        return redirect('/')
+
+
+# надо поработать над пагинатором но это не точно)
+class SearchTurnView(PermissionRequiredMixin, View):
+    """Очередь Поиск пользователей по ФИО"""
+
+    def get(self, request):
+        if self.request.GET.get('turn'):
+            turn = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('turn'))}
+            return render(self.request, "turn/turn_list.html", turn)
+        elif self.request.GET.get('partner'):
+            partner = {'object_list': User.objects.filter(groups__permissions=Permission.objects.get(codename='shareholder'), profile__full_name__icontains=self.request.GET.get('partner'))}
+            return render(self.request, "turn/partner_list.html", partner)
+        elif self.request.GET.get('member'):
+            member = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('member'))}
+            return render(self.request, "turn/members_list.html", member)
+        elif self.request.GET.get('debtor'):
+            debtor = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('debtor'))}
+            return render(self.request, "turn/debtor_list.html", debtor)
+        elif self.request.GET.get('deal'):
+            deal = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('deal'))}
+            return render(self.request, "turn/deal_list.html", deal)
+        elif self.request.GET.get('calc'):
+            calc = {'object_list': Profile.objects.filter(full_name__icontains=self.request.GET.get('calc'))}
+            return render(self.request, "turn/calculated_list.html", calc)
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator') or user.has_perm('profile.distributor_one') or user.has_perm('profile.distributor_two') or user.has_perm('profile.distributor_three')
+
+    def handle_no_permission(self):
+        return redirect('/')
 

@@ -1,17 +1,7 @@
-# from datetime import timedelta, datetime
-#
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.http import HttpResponse, Http404
-#
-# from django.db.models import Q, F
-# from django.urls import reverse_lazy
-# from django.views.generic.dates import BaseDateListView
-#
-# from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, View, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post
 
@@ -41,11 +31,11 @@ class SinglePostView(LoginRequiredMixin, DetailView):
 class CreatePostView(PermissionRequiredMixin, CreateView):
     """Создание новости в шаблоне"""
     model = Post
-    fields = ['title', 'image', 'text', 'published_date', 'published']
+    fields = ['title', 'image', 'mini_text', 'text', 'published_date', 'published']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        messages.success(self.request, f'Ваша статья готовится к публикации!')
+        # messages.success(self.request, f'Ваша статья готовится к публикации!')
         return super().form_valid(form)
 
     def has_permission(self):
@@ -54,3 +44,37 @@ class CreatePostView(PermissionRequiredMixin, CreateView):
 
     def handle_no_permission(self):
         return redirect('/')
+
+
+class UpdatePostView(PermissionRequiredMixin, UpdateView):
+    """Обновляем новости в шаблоне"""
+    model = Post
+    slug_field = 'slug'
+    fields = ['title', 'image', 'mini_text', 'text', 'published_date', 'published']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        # messages.success(self.request, f'Ваша статья готовится к публикации!')
+        return super().form_valid(form)
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator')
+
+    def handle_no_permission(self):
+        return redirect('/')
+
+
+class DeletePostView(PermissionRequiredMixin, DeleteView):
+    """Удаляем новости в шаблоне"""
+    model = Post
+    slug_field = 'slug'
+    success_url = '/'
+
+    def has_permission(self):
+        user = self.request.user
+        return user.has_perm('profile.administrator')
+
+    def handle_no_permission(self):
+        return redirect('/')
+

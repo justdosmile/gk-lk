@@ -681,7 +681,7 @@ a.platez.c2{
 .content-body input[type=text], .content-body input[type=date], .content-body input[type=password], .content-body input[type=number]{
 	display: inline-block;
 	margin-bottom: 20px;
-	background:#efefef;
+	background:#ffffff;
 	border-radius: 4px;
 	padding:10px 16px;
 	border:1px solid #ddd;

@@ -61,7 +61,6 @@ class Profile(models.Model):
     installment_period = models.DateTimeField("Срок рассрочки", blank=True, null=True)
     percent_installment = models.IntegerField("Процент рассрочки", blank=True, null=True)
     number_score = models.CharField("Номер счета", max_length=15, blank=True, null=True)
-    # service_group =
 
     def __str__(self):
         return "{}".format(self.user)
