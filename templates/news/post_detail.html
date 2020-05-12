@@ -37,7 +37,9 @@
                 <span class="newsdate">...</span>
             {% endif %}
         </div>
+    {% if perms.profile.administrator %}
         <a href="{% url 'update_post' post.slug %}" class="savebut">Обновит статью</a>
         <a href="{% url 'delete_post' post.slug %}" class="savebut">Удалить статью</a>
+    {% endif %}
     </div>
 {% endblock content %}
