@@ -43,7 +43,7 @@
                     <tbody>
                     {% for support in object_list %}
                         <tr>
-                            <td>{{ support.user.profile.full_name }}</td>
+                            <td><a href="{% url "user_profile" support.user.profile.pk %}">{{ support.user.profile.full_name }}</a></td>
                             <td>{{ support.date }}</td>
                             <td>{{ support.title }}</td>
                             <td>{{ support.text }}</td>

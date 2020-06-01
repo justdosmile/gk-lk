@@ -30,29 +30,73 @@
                         <td>Дата вопроса</td>
                         <td>Заголовок вопроса</td>
                         <td>Вопрос</td>
+                        <td>Фото</td>
                         <td>Статус</td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>{{ single_support.user }}</td>
+                        <td>{{ single_support.user.profile.full_name }}</td>
                         <td>{{ single_support.date }}</td>
                         <td>{{ single_support.title }}</td>
                         <td>{{ single_support.text }}</td>
+                        <td><a href="{{ single_support.image.url }}">Фото</a></td>
                         {% if single_support.processing == False %}
                             <td>В ожидании</td>
                         {% else %}
                             <td>Рассмотрено</td>
                         {% endif %}
+
                     </tr>
                     </tbody>
                 </table>
             </div>
             <br><br>
-            <form action="">
+            <div class="table">
+            <table>
+            <thead>
+                <tr>
+                    <td>ФИО</td>
+                    <td>Дата ответа</td>
+                    <td>Заголовок ответа</td>
+                    <td>Ответ</td>
+                    <td>Фото</td>
+                    <td>Статус</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for answer in single_support.reply.all %}
+                    <tr>
+                        <td>{{ answer.user.profile.full_name }}</td>
+                        <td>{{ answer.data }}</td>
+                        <td>{{ single_support.title }}</td>
+                        <td>{{ answer.text }}</td>
+                        {% if not answer.image %}
+                            <td>Без вложения</td>
+                        {% else %}
+                            <td><a href="{{ answer.image.url }}">Фото</a></td>
+                        {% endif %}
+
+                            <td>Отправлено</td>
+
+                    </tr>
+                {% endfor %}
+                    </tbody>
+
+            </table>
+            </div>
+            <br><br>
+            <form action="{% url 'feedback:add_answer' single_support.pk %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label>Заголовок ответа:</label>
+                <input type="text" name="title" required placeholder="Макс. 50 символов"><br>
                 <label>Ответ</label>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-                <input type="button" value="Ответить" class="savebut" style="margin-right:20px">
+                <textarea name="text" id="" cols="30" rows="10"></textarea>
+                <label>Приложите фото/скриншот:</label><br><br>
+                <div class="file-inp">
+                    <label><input type="file" name="image"><span>Выберите файл</span></label>
+                </div>
+                <input type="submit" value="Ответить" class="savebut" style="margin-right:20px">
             </form>
         </div>
     </div>

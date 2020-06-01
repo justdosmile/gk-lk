@@ -6,11 +6,12 @@ from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.base import View
 
 from .models import Feedback
-from .forms import FeedbackForm
+from .forms import FeedbackForm, AnswerForm
 from ..profile.models import Profile
+from ..profile.permissions import AdminPermissionsMixin, NoAdminPermissionsMixin
 
 
-class FeedbackListView(LoginRequiredMixin, ListView):
+class FeedbackListView(NoAdminPermissionsMixin, ListView):
     """Список обратных связей"""
     paginate_by = 6
     template_name = "feedback/feedback_list.html"
@@ -21,7 +22,7 @@ class FeedbackListView(LoginRequiredMixin, ListView):
         return Feedback.objects.filter(user=self.request.user)
 
 
-class FeedbackAdminListView(PermissionRequiredMixin, ListView):
+class FeedbackAdminListView(AdminPermissionsMixin, ListView):
     """Список обратных связей в адменистрированнии"""
     paginate_by = 6
     template_name = "administrirovanie/admin-support.html"
@@ -29,15 +30,8 @@ class FeedbackAdminListView(PermissionRequiredMixin, ListView):
     def get_queryset(self):
         return Feedback.objects.all()
 
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
 
-    def handle_no_permission(self):
-        return redirect('/')
-
-
-class FeedbackDetailView(PermissionRequiredMixin, DetailView):
+class FeedbackDetailView(AdminPermissionsMixin, DetailView):
     """Детально о запросе в адменистрированнии"""
     model = Feedback
     context_object_name = 'single_support'
@@ -46,13 +40,19 @@ class FeedbackDetailView(PermissionRequiredMixin, DetailView):
         obj = get_object_or_404(Feedback, id=self.kwargs.get('pk'))
         return obj
 
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
 
-    def handle_no_permission(self):
-        return redirect('/')
-
+class AnswerView(View):
+    """Ответ на вопрос пользователя"""
+    def post(self, request, pk):
+        form = AnswerForm(request.POST, request.FILES)
+        feedback = Feedback.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.user = request.user
+            form.feedback = feedback
+            form.save()
+            # messages.success(request, f'Ваш комментарий был успешно создан!')
+        return redirect(feedback.get_absolute_url())
 
 # class SearchFeedbackView(PermissionRequiredMixin, ListView):
     # """Поиск пользователей по ФИО в адменистрированнии"""

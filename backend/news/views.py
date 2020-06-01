@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post
+from ..profile.permissions import AdminPermissionsMixin
 
 
 class PostListView(LoginRequiredMixin, ListView):
@@ -28,7 +29,7 @@ class SinglePostView(LoginRequiredMixin, DetailView):
         return query
 
 
-class CreatePostView(PermissionRequiredMixin, CreateView):
+class CreatePostView(AdminPermissionsMixin, CreateView):
     """Создание новости в шаблоне"""
     model = Post
     fields = ['title', 'image', 'mini_text', 'text', 'published_date', 'published']
@@ -38,43 +39,23 @@ class CreatePostView(PermissionRequiredMixin, CreateView):
         # messages.success(self.request, f'Ваша статья готовится к публикации!')
         return super().form_valid(form)
 
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
 
-    def handle_no_permission(self):
-        return redirect('/')
-
-
-class UpdatePostView(PermissionRequiredMixin, UpdateView):
+class UpdatePostView(AdminPermissionsMixin, UpdateView):
     """Обновляем новости в шаблоне"""
     model = Post
     slug_field = 'slug'
     fields = ['title', 'image', 'mini_text', 'text', 'published_date', 'published']
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.author = self.request.user  # --?????
         # messages.success(self.request, f'Ваша статья готовится к публикации!')
         return super().form_valid(form)
 
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
 
-    def handle_no_permission(self):
-        return redirect('/')
-
-
-class DeletePostView(PermissionRequiredMixin, DeleteView):
+class DeletePostView(AdminPermissionsMixin, DeleteView):
     """Удаляем новости в шаблоне"""
     model = Post
     slug_field = 'slug'
     success_url = '/'
 
-    def has_permission(self):
-        user = self.request.user
-        return user.has_perm('profile.administrator')
-
-    def handle_no_permission(self):
-        return redirect('/')
 

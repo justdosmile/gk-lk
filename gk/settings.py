@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'backend.news',
     'backend.calculator',
     'backend.feedback',
+    'backend.document',
 ]
 
 MIDDLEWARE = [

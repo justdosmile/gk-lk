@@ -13,7 +13,6 @@
 
 
 {% block content %}
-
 			<div class="content">
 				<h1>
 					Инструкции
@@ -27,41 +26,16 @@
 							</tr>
 						</thead>
 						<tbody>
+                        {% for doc in object_list %}
 							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
+								<td>{{ doc.title }}</td>
 								<td>
-									<a href="#" target="_blank">Скачать</a>
+									<a href="{{ doc.sample.url }}" target="_blank">Просмотреть</a>
 								</td>
 							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td>
-									<a href="#" target="_blank">Скачать</a>
-								</td>
-							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td>
-									<a href="#" target="_blank">Скачать</a>
-								</td>
-							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td>
-									<a href="#" target="_blank">Скачать</a>
-								</td>
-							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td>
-									<a href="#" target="_blank">Скачать</a>
-								</td>
-							</tr>
-							
+                        {% endfor %}
 						</tbody>
 					</table>
-
 				</div>
-
 			</div>
 		{% endblock content %}

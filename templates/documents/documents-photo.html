@@ -32,7 +32,13 @@
 						</ul>
 						<div class="resp-img"><img src="{% static 'img/primer.png' %}" alt=""></div>
 					</p>
-
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <div class="info"><img src="{% static 'img/information.svg' %}" alt="">{{ message }}</div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 					<div class="table">
 						<table>
 							<thead>
@@ -43,22 +49,40 @@
 								</tr>
 							</thead>
 							<tbody>
+
+                            {% for doc in object_list %}
 								<tr>
-									<td>Фотоверификация</td>
+									<td>{{ doc.title }}</td>
 									<td>
-										<div class="file-inp">
-										<label><input type="file" name="file"><span>Выберите файл</span></label>
-										</div>
-									</td>
-									<td>Не загружен</td>
+                                        {% if not doc.docs.all  %}
+                                            <form action="{% url 'add_doc' %}" method="post" enctype="multipart/form-data" >
+                                                {% csrf_token %}
+                                                <div class="file-inp">
+                                                    <input type="hidden" name="doc" id="id_doc" value="{{ doc.pk }}">
+                                                    <label><input type="file" name="user_document" ><span>Выберите файл</span></label>
+                                                </div>
+                                                <input type="submit" value="Сохранить"  class="savebut">
+                                            </form>
+                                    </td>
+                                        <td>Не загружен</td>
+                                        {% else %}
+                                           {% for see in doc.docs.all %}
+                                               <a href="{{ see.user_document.url }}" target="_blank">смотреть документ</a>
+                                               {% if see.moderation == False %}
+                                                   <td>В обработке</td>
+                                               {% else %}
+                                                   <td>Проверено {{ see.updated }}</td>
+                                               {% endif %}
+                                           {% endfor %}
+                                        {% endif %}
 								</tr>
+                            {% endfor %}
 							</tbody>
 						</table>
 					</div>
 
-<input type="button" value="Сохранить" class="savebut">
-<div class="info"><img src="{% static 'img/information.svg' %}" alt="">Изменения сохранены</div>
-<div class="error"><img src="{% static 'img/error.svg' %}" alt="">Ошибка сохранения. Обратитесь в <a href="#">поддержку</a></div>
+{#<div class="info"><img src="{% static 'img/information.svg' %}" alt="">Изменения сохранены</div>#}
+{#<div class="error"><img src="{% static 'img/error.svg' %}" alt="">Ошибка сохранения. Обратитесь в <a href="#">поддержку</a></div>#}
 
 				</div>
 

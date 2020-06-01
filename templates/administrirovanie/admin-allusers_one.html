@@ -1,242 +1,242 @@
-{% extends 'base.html' %}
-
-{% block mobile %}
-	<!-- Меню и заголовок для мобилы -->
-	<div class="const mobile-nav">
-		<a href="javascript:;" class="menu-open"></a>
-		<h1>
-			Изменение пользователя  <!-- Дублировал для мобильной версии -->
-		</h1>
-	</div>
-	<!-- /Меню и заголовок для мобилы -->
-{% endblock mobile %}
-
-
-{% block content %}
-			<div class="content">
-				<h1>
-					Изменение пользователя
-				</h1>
-
-                {% include 'include/admin_menu.html' %}
-
-
-<div class="content-body">
-		<table class="profile">
-			<thead><tr><td colspan="2">Персональные данные</td></tr></thead>
-			<tbody>
-				<tr>
-					<td>ФИО:</td>
-					<td><input type="text" value="Иванов Станислав Викторович"></td>
-				</tr>
-				<tr>
-					<td>Мобильный:</td>
-					<td><input type="text" value="+79999999999"></td>
-				</tr>
-				<tr>
-					<td>E-mail:</td>
-					<td><input type="text" value="admin@mail.ru"></td>
-				</tr>
-				<tr>
-					<td>Номер счета:</td>
-					<td>COOP-007-20203232</td>
-				</tr>
-				<tr>
-					<td>Группа пользователя:</td>
-					<td>
-						<select name="" id="">
-							<option value="" selected>Кандидат в пайщики</option>
-							<option value="">Пайщик</option>
-							<option value="">Распространитель 1ур</option>
-							<option value="">Распространитель 2ур</option>
-							<option value="">Распространитель 3ур</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>...</td>
-				</tr>
-				
-			</tbody>
-			<thead><tr><td colspan="2">Адресные данные</td></tr></thead>
-			<tbody>
-				<tr>
-					<td colspan="2"><h3>Адрес регистрации</h3></td>
-				</tr>
-				<tr>
-					<td>Страна:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите страну</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Регион:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите регион</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Город:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите город</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Улица:</td>
-					<td>
-						<input type="text" placeholder="Полное название улицы">
-					</td>
-				</tr>
-				<tr>
-					<td>Дом:</td>
-					<td>
-						<input type="text" placeholder="Номер дома">
-					</td>
-				</tr>
-				<tr>
-					<td>Корпус:</td>
-					<td>
-						<input type="text" placeholder="Если есть">
-					</td>
-				</tr>
-				<tr>
-					<td>Квартира:</td>
-					<td>
-						<input type="text" placeholder="Номер квартиры">
-					</td>
-				</tr>
-				<tr>
-					<td>Индекс:</td>
-					<td>
-						<input type="text" placeholder="XXXXXX">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"><h3>Адрес фактического проживания</h3></td>
-				</tr>
-				<tr>
-					<td>Страна:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите страну</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Регион:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите регион</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Город:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Выберите город</option>
-							<option value="">Россия</option>
-							<option value="">Украина</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>Улица:</td>
-					<td>
-						<input type="text" placeholder="Полное название улицы">
-					</td>
-				</tr>
-				<tr>
-					<td>Дом:</td>
-					<td>
-						<input type="text" placeholder="Номер дома">
-					</td>
-				</tr>
-				<tr>
-					<td>Корпус:</td>
-					<td>
-						<input type="text" placeholder="Если есть">
-					</td>
-				</tr>
-				<tr>
-					<td>Квартира:</td>
-					<td>
-						<input type="text" placeholder="Номер квартиры">
-					</td>
-				</tr>
-				<tr>
-					<td>Индекс:</td>
-					<td>
-						<input type="text" placeholder="XXXXXX">
-					</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>
-						...
-					</td>
-				</tr>
-			</tbody>
-			<thead><tr><td colspan="2">Анкета</td></tr></thead>
-			<tbody>
-				<tr>
-					<td>Образование:</td>
-					<td>
-						<select name="" id="">
-							<option value="">Высшее</option>
-							<option value="">Среднее</option>
-							<option value="">Низшее</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>...</td>
-					<td>
-						...
-					</td>
-				</tr>
-			</tbody>
-			<thead><tr><td colspan="2">Безопасность</td></tr></thead>
-			<tbody>
-				<tr>
-					<td>Старый пароль:</td>
-					<td>
-						<input type="password" name="" id="">
-					</td>
-				</tr>
-				<tr>
-					<td>Новый пароль:</td>
-					<td>
-						<input type="password" name="" id="">
-					</td>
-				</tr>
-				<tr>
-					<td>Повторите пароль:</td>
-					<td>
-						<input type="password" name="" id="">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<input type="button" value="Сохранить" class="savebut">
-		<div class="info"><img src="img/information.svg" alt="">Изменения сохранены</div>
-	</div>
-				</div>
-{% endblock content %}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block mobile %}#}
+{#	<!-- Меню и заголовок для мобилы -->#}
+{#	<div class="const mobile-nav">#}
+{#		<a href="javascript:;" class="menu-open"></a>#}
+{#		<h1>#}
+{#			Изменение пользователя  <!-- Дублировал для мобильной версии -->#}
+{#		</h1>#}
+{#	</div>#}
+{#	<!-- /Меню и заголовок для мобилы -->#}
+{#{% endblock mobile %}#}
+{##}
+{##}
+{#{% block content %}#}
+{#			<div class="content">#}
+{#				<h1>#}
+{#					Изменение пользователя#}
+{#				</h1>#}
+{##}
+{#                {% include 'include/admin_menu.html' %}#}
+{##}
+{##}
+{#<div class="content-body">#}
+{#		<table class="profile">#}
+{#			<thead><tr><td colspan="2">Персональные данные</td></tr></thead>#}
+{#			<tbody>#}
+{#				<tr>#}
+{#					<td>ФИО:</td>#}
+{#					<td><input type="text" value="Иванов Станислав Викторович"></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Мобильный:</td>#}
+{#					<td><input type="text" value="+79999999999"></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>E-mail:</td>#}
+{#					<td><input type="text" value="admin@mail.ru"></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Номер счета:</td>#}
+{#					<td>COOP-007-20203232</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Группа пользователя:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="" selected>Кандидат в пайщики</option>#}
+{#							<option value="">Пайщик</option>#}
+{#							<option value="">Распространитель 1ур</option>#}
+{#							<option value="">Распространитель 2ур</option>#}
+{#							<option value="">Распространитель 3ур</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>...</td>#}
+{#					<td>...</td>#}
+{#				</tr>#}
+{#				#}
+{#			</tbody>#}
+{#			<thead><tr><td colspan="2">Адресные данные</td></tr></thead>#}
+{#			<tbody>#}
+{#				<tr>#}
+{#					<td colspan="2"><h3>Адрес регистрации</h3></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Страна:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите страну</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Регион:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите регион</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Город:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите город</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Улица:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Полное название улицы">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Дом:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Номер дома">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Корпус:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Если есть">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Квартира:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Номер квартиры">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Индекс:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="XXXXXX">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td colspan="2"><h3>Адрес фактического проживания</h3></td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Страна:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите страну</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Регион:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите регион</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Город:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Выберите город</option>#}
+{#							<option value="">Россия</option>#}
+{#							<option value="">Украина</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Улица:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Полное название улицы">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Дом:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Номер дома">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Корпус:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Если есть">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Квартира:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="Номер квартиры">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Индекс:</td>#}
+{#					<td>#}
+{#						<input type="text" placeholder="XXXXXX">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>...</td>#}
+{#					<td>#}
+{#						...#}
+{#					</td>#}
+{#				</tr>#}
+{#			</tbody>#}
+{#			<thead><tr><td colspan="2">Анкета</td></tr></thead>#}
+{#			<tbody>#}
+{#				<tr>#}
+{#					<td>Образование:</td>#}
+{#					<td>#}
+{#						<select name="" id="">#}
+{#							<option value="">Высшее</option>#}
+{#							<option value="">Среднее</option>#}
+{#							<option value="">Низшее</option>#}
+{#						</select>#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>...</td>#}
+{#					<td>#}
+{#						...#}
+{#					</td>#}
+{#				</tr>#}
+{#			</tbody>#}
+{#			<thead><tr><td colspan="2">Безопасность</td></tr></thead>#}
+{#			<tbody>#}
+{#				<tr>#}
+{#					<td>Старый пароль:</td>#}
+{#					<td>#}
+{#						<input type="password" name="" id="">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Новый пароль:</td>#}
+{#					<td>#}
+{#						<input type="password" name="" id="">#}
+{#					</td>#}
+{#				</tr>#}
+{#				<tr>#}
+{#					<td>Повторите пароль:</td>#}
+{#					<td>#}
+{#						<input type="password" name="" id="">#}
+{#					</td>#}
+{#				</tr>#}
+{#			</tbody>#}
+{#		</table>#}
+{#		<input type="button" value="Сохранить" class="savebut">#}
+{#		<div class="info"><img src="img/information.svg" alt="">Изменения сохранены</div>#}
+{#	</div>#}
+{#				</div>#}
+{#{% endblock content %}#}

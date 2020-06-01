@@ -8,4 +8,6 @@ urlpatterns = [
     path("single_support/<int:pk>/", views.FeedbackDetailView.as_view(), name="feedback_single"),
     path("all_support/", views.FeedbackAdminListView.as_view(), name="feedback_admin"),
     path("", views.FeedbackListView.as_view(), name="feedback"),
+
+    path("add_answer/<int:pk>", views.AnswerView.as_view(), name="add_answer"),
 ]

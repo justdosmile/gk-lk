@@ -40,7 +40,7 @@
                 {% for member in object_list %}
                     <tbody>
                     <tr>
-                        <td>{{ member.profile.full_name }}</td>
+                        <td><a href="{% url "user_profile" member.pk %}">{{ member.profile.full_name }}</a></td>
                         <td>{{ member.date_joined }}</td>
                         <td>{{ member.date_joined }}</td>
                         <td>{{ member.accumulated_queue }}</td>

@@ -15,17 +15,6 @@ urlpatterns = [
     path("confirm_payment/", views.ConfirmPaymentView.as_view(), name="confirm_payment"),
     path("history_payment/", views.HistoryPaymentView.as_view(), name="history_payment"),
 
-    path("verification/", views.VerificationDocView.as_view(), name="verification"),
-    path("photo_verification/", views.PhotoVerificationDocView.as_view(), name="photo_verif"),
-    path("documents/", views.DocView.as_view(), name="documents"),
-    path("sample/", views.SampleDocView.as_view(), name="sample"),
-    path("instructions/", views.InstructionView.as_view(), name="instructions"),
-
-
-    path("create/", views.CreateAddressView.as_view(), name="create"),
-    # path("create2/", views.CreateAddress.as_view(), name="create2"),
-    # path("", views.edit, name="profile"),
-
     path("hierarchy/", views.HierarchyView.as_view(), name="hierarchy"),
     path("invitation/", views.LinkInvitationView.as_view(), name="invitation"),
 
@@ -36,6 +25,8 @@ urlpatterns = [
     path("all_payment/", views.AdminAllPaymentView.as_view(), name="all_payment"),
     path("admin_search/", views.SearchAdminView.as_view(), name="admin_search"),
     path("turn_search/", views.SearchTurnView.as_view(), name="turn_search"),
-    # path("all_support/", views.AdminAllSupportView.as_view(), name="all_support"),
+
+    path("see_profile/<int:pk>/", views.AdminUserProfileView.as_view(), name="user_profile"),
+    path("update/<int:pk>/", views.UpdateProfileView.as_view(), name="update_profile"),
     path("", views.ProfileView.as_view(), name="profile"),
 ]

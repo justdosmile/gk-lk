@@ -29,6 +29,12 @@ class UserSignUpForm(forms.ModelForm):
         # user.save()
 
 
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['full_name']
+
+
 class UpdateAddressRegistrationForm(forms.ModelForm):
     class Meta:
         model = AddressRegistration

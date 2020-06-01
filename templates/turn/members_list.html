@@ -38,7 +38,7 @@
                 {% for member in object_list %}
                     <tbody>
                     <tr>
-                        <td>{{ member.full_name }}</td>
+                        <td><a href="{% url "user_profile" member.pk %}">{{ member.full_name }}</a></td>
                         <td>{{ member.user.date_joined }}</td>
                         <td>{{ member.user.groups.all.0 }}</td>
                     </tr>

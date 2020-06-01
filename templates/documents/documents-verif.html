@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block mobile %}
 	<!-- Меню и заголовок для мобилы -->
@@ -22,6 +23,13 @@
                 {% include "include/verif_doc_menu.html" %}
 
 				<div class="content-body">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <div class="info"><img src="{% static 'img/information.svg' %}" alt="">{{ message }}</div>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
 					<table>
 						<thead>
 							<tr>
@@ -32,40 +40,39 @@
 							</tr>
 						</thead>
 						<tbody>
+                        {% for doc in object_list %}
 							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td><a href="#" target="_blank">Смотреть образец</a></td>
+								<td>{{ doc.title }}</td>
+								<td><a href="{{ doc.sample.url }}" target="_blank">Смотреть образец</a></td>
 								<td>
-									<a href="#" target="_blank">Смотреть документ</a>
-								</td>
-								<td>Проверен. 12:00 25.08.2020</td>
-							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td><a href="#" target="_blank">Смотреть образец</a></td>
-								<td>
-									<div class="file-inp">
-									<label><input type="file" name="file"><span>Выберите файл</span></label>
-									</div>
-								</td>
-								<td>Не загружен</td>
-							</tr>
-							<tr>
-								<td>Заявление на вступление в члены ЖК</td>
-								<td><a href="#" target="_blank">Смотреть образец</a></td>
-								<td>
-									<div class="file-inp">
-									<label><input type="file" name="file"><span>Выберите файл</span></label>
-									</div>
+									{% if not doc.docs.all  %}
+                                            <form action="{% url 'add_doc' %}" method="post" enctype="multipart/form-data" >
+                                                {% csrf_token %}
+                                                <div class="file-inp">
+                                                    <input type="hidden" name="doc" id="id_doc" value="{{ doc.pk }}">
+                                                    <label><input type="file" name="user_document" ><span>Выберите файл</span></label>
+                                                </div>
+                                                <input type="submit" value="Сохранить"  class="savebut">
+                                            </form>
 								</td>
 								<td>Не загружен</td>
+                                        {% else %}
+                                           {% for see in doc.docs.all %}
+                                               <a href="{{ see.user_document.url }}" target="_blank">смотреть документ</a>
+                                               {% if see.moderation == False %}
+                                                   <td>В обработке</td>
+                                               {% else %}
+                                                   <td>Проверено {{ see.updated }}</td>
+                                               {% endif %}
+                                           {% endfor %}
+                                        {% endif %}
 							</tr>
+                        {% endfor %}
 						</tbody>
 					</table>
 
-<input type="button" value="Сохранить" class="savebut">
-<div class="info"><img src="img/information.svg" alt="">Изменения сохранены</div>
-<div class="error"><img src="img/error.svg" alt="">Ошибка сохранения. Обратитесь в <a href="#">поддержку</a></div>
+{#<div class="info"><img src="img/information.svg" alt="">Изменения сохранены</div>#}
+{#<div class="error"><img src="img/error.svg" alt="">Ошибка сохранения. Обратитесь в <a href="#">поддержку</a></div>#}
 
 				</div>
 

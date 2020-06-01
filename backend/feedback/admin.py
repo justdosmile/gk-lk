@@ -1,7 +1,9 @@
 from django.contrib import admin
-from .models import Feedback
+
+from backend.feedback.models import Feedback, Answer
 
 
+@admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
     """Обратная связь"""
     list_display = ('title', 'user', 'date', "processing", "id")
@@ -9,4 +11,9 @@ class FeedbackAdmin(admin.ModelAdmin):
     search_fields = ("title",)
 
 
-admin.site.register(Feedback, FeedbackAdmin)
+@admin.register(Answer)
+class AnswerAdmin(admin.ModelAdmin):
+    list_display = ('user', 'feedback', 'data')
+    list_filter = ('data',)
+    search_fields = ('user', 'text')
+

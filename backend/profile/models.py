@@ -81,12 +81,12 @@ class Profile(models.Model):
 
 class AbstractAddressModel(models.Model):
     """Абстрактная модель адреса"""
-    country = models.CharField("Страна", max_length=50, blank=True, null=True)
-    region = models.CharField("Регион", max_length=50, blank=True, null=True)
-    city = models.CharField("Город", max_length=50, blank=True, null=True)
+    country = models.CharField("Страна", max_length=50, blank=True)
+    region = models.CharField("Регион", max_length=50, blank=True)
+    city = models.CharField("Город", max_length=50, blank=True)
     street = models.CharField("Улица", max_length=50, blank=True)
     house = models.IntegerField("Дом", blank=True, null=True)
-    corpus = models.CharField("Корпус", max_length=50, blank=True, null=True)
+    corpus = models.CharField("Корпус", max_length=50, blank=True)
     flat = models.IntegerField("Квартира", blank=True, null=True)
     index = models.IntegerField("Индекс", blank=True, null=True)
 
@@ -148,6 +148,14 @@ class AddressPost(AbstractAddressModel):
 #     if created:
 #         Profile.objects.create(user=instance, id=instance.id)
 #         instance.profile.save()
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    """Создание профиля пользователя при регистрации"""
+    if created:
+        AddressRegistration.objects.create(reg_name=instance, id=instance.id)
+        AddressActual.objects.create(act_name=instance, id=instance.id)
+        AddressPost.objects.create(post_name=instance, id=instance.id)
 
 # 4.3. Анкета
 

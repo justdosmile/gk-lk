@@ -5,6 +5,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('document/', include('backend.document.urls')),
     path('calculator/', include('backend.calculator.urls')),
     path('accounts/', include('allauth.urls')),
     path('feedback/', include('backend.feedback.urls')),

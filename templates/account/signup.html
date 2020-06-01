@@ -26,9 +26,9 @@
         <input {% if form.birthday.errors %} style="border: 1px solid red;" {% endif %} type="date" name="birthday" id="id_birthday" placeholder="Дата рождения">
         <input {% if form.citizenship.errors %} style="border: 1px solid red;" {% endif %} type="text" name="citizenship" id="id_citizenship" placeholder="Гражданство">
 {#        <hr>#}
-        <input {% if form.email.errors %} style="border: 1px solid red;" {% endif %} type="email" name="email" placeholder="E-mail адрес" required="" id="id_email">
-        <input {% if form.email.errors %} style="border: 1px solid red;" {% endif %} type="password" name="password1" placeholder="Пароль" required="" id="id_password1">
-        <input {% if form.password2.errors %} style="border: 1px solid red;" {% endif %} type="password" name="password2" placeholder="Пароль (ещё раз)" required="" id="id_password2">
+        <input {% if form.email.errors %} style="border: 1px solid red;" {% endif %} type="email" name="email" placeholder="E-mail адрес" required id="id_email">
+        <input {% if form.email.errors %} style="border: 1px solid red;" {% endif %} type="password" name="password1" placeholder="Пароль" required id="id_password1">
+        <input {% if form.password2.errors %} style="border: 1px solid red;" {% endif %} type="password" name="password2" placeholder="Пароль (ещё раз)" required id="id_password2">
         <hr>
         <input {% if form.phone.errors %} style="border: 1px solid red;" {% endif %} type="text" name="phone" placeholder="Телефон" maxlength="12" id="id_phone">
         <input {% if form.cost_housing.errors %} style="border: 1px solid red;" {% endif %} type="text" name="cost_housing" id="id_cost_housing" placeholder="Стоимость жилья">

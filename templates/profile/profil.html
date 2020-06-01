@@ -16,184 +16,166 @@
 {% block content %}
     <div class="content">
         <h1>
-            Профиль
+            Профиль - {{ profile.user }}
         </h1>
         <div class="content-body">
             <table class="profile">
                 <tbody>
-                <thead><tr><td colspan="2">Персональные данные</td></tr></thead>
-                <tbody>
-                    <tr>
-                        <td>ФИО:</td>
-                        <td>{{ user.profile.full_name }}</td>
-                    </tr>
-                    <tr>
-                        <td>Мобильный:</td>
-                        <td>{{ user.profile.phone }} <a href="#" class="edit"></a></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail:</td>
-                        <td>{{ user.profile.email }}</td>
-                    </tr>
-                    <tr>
-                        <td>Номер счета:</td>
-                        <td>COOP-007-20203232</td>
-                    </tr>
-                    <tr>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
+                    <thead><tr><td colspan="2">Персональные данные</td></tr></thead>
+                    <tbody>
+                    <form action="{% url 'update_profile' profile.pk %}" method="post">
+                        {% csrf_token %}
+                        <tr>
+                            <td>ФИО:</td>
+                            <td>
+                                {% if perms.profile.administrator %}
+                                    <input type="text" name="full_name" placeholder="ФИО" value="{{ profile.full_name }}">
+                                {% else %}
+                                    {{ profile.full_name }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Мобильный:</td>
+                            <td>{{ profile.phone }} <a href="#" class="edit"></a></td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>{{ profile.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Номер счета:</td>
+                            <td>COOP-007-20203232</td>
+                        </tr>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <td>
+                            <input type="submit" name="submit_profile" value="Сохранить" class="savebut">
+                        </td>
+                    </form>
+                    </tbody>
 
-                </tbody>
-                <thead><tr><td colspan="2">Адресные данные</td></tr></thead>
-<form action="{% url "create" %}" method="post">
-{% csrf_token %}
-                    <tr>
-                        <td colspan="2"><h3>Адрес регистрации</h3></td>
-                    </tr>
-                    <tr>
-                        <td>Страна:</td>
-                        <td>
+                    <thead><tr><td colspan="2">Адресные данные</td></tr></thead>
+                    <form action="{% url 'update_profile' profile.pk %}" method="post">
+                        {% csrf_token %}
+                        {% for registration in address_registration %}
+                            <tr>
+                                <td colspan="2"><h3>Адрес регистрации</h3></td>
+                            </tr>
+                            <tr>
+                                <td>Страна:</td>
+                                <td>
+                                    <input type="text" name="country" placeholder="Укажите страну" value="{{ registration.country }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Регион:</td>
+                                <td>
+                                    <input type="text" name="region" placeholder="Укажите регион" value="{{ registration.region }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Город:</td>
+                                <td>
+                                    <input type="text" name="city" placeholder="Укажите город" value="{{ registration.city }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Улица:</td>
+                                <td>
+                                    <input type="text" name="street" placeholder="Полное название улицы" value="{{ registration.street }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дом:</td>
+                                <td>
+                                    <input type="text" name="house" {% if not registration.house %} placeholder="Номер дома" {% else %} value="{{ registration.house }}" {% endif %}>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Корпус:</td>
+                                <td>
+                                    <input type="text" name="corpus" placeholder="Если есть" value="{{ registration.corpus }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Квартира:</td>
+                                <td>
+                                    <input type="text" name="flat" {% if not registration.flat %} placeholder="Номер квартиры" {% else %} value="{{ registration.flat }}" {% endif %}>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Индекс:</td>
+                                <td>
+                                    <input type="text" name="index" {% if not registration.index %} placeholder="XXXXXX" {% else %} value="{{ registration.index }}" {% endif %}>
+                                </td>
+                            </tr>
+                        {% endfor %}
 
-                            {{ user.addressregistration.country }}
-
-                            <select name="country" id="">
-                                <option value="{{ user.addressregistration.country }}">Выберите страну</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Регион:</td>
                         <td>
-                            {{ user.addressregistration.region }}
-                            <select name="region" id="">
-                                <option value="{{ user.addressregistration.region }}">Выберите регион</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
+                            <input type="submit" name="submit_one" value="Сохранить" class="savebut">
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Город:</td>
+                    </form>
+                    <form action="{% url 'update_profile' profile.pk %}" method="post">
+                        {% csrf_token %}
+                        {% for actual in address_actual %}
+                            <tr>
+                                <td colspan="2"><h3>Адрес фактического проживания</h3></td>
+                            </tr>
+                            <tr>
+                                <td>Страна:</td>
+                                <td>
+                                    <input type="text" name="country" placeholder="Укажите страну" value="{{ actual.country }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Регион:</td>
+                                <td>
+                                    <input type="text" name="region" placeholder="Укажите регион" value="{{ actual.region }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Город:</td>
+                                <td>
+                                    <input type="text" name="city" placeholder="Укажите город" value="{{ actual.city }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Улица:</td>
+                                <td>
+                                    <input type="text" name="street" placeholder="Полное название улицы" value="{{ actual.street }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Дом:</td>
+                                <td>
+                                    <input type="text" name="house" {% if not actual.house %} placeholder="Номер дома" {% else %} value="{{ actual.house }}{% endif %}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Корпус:</td>
+                                <td>
+                                    <input type="text" name="corpus" placeholder="Если есть" value="{{ actual.corpus }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Квартира:</td>
+                                <td>
+                                    <input type="text" name="flat"  {% if not actual.flat %} placeholder="Номер квартиры" {% else %} value="{{ actual.flat }}" {% endif %}>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Индекс:</td>
+                                <td>
+                                    <input type="text" name="index" {% if not actual.index %} placeholder="XXXXXX" {% else %} value="{{ actual.index }}" {% endif %}>
+                                </td>
+                            </tr>
+                        {% endfor %}
                         <td>
-                            {{ user.addressregistration.city }}
-                            <select name="city" id="">
-                                <option value="{{ user.addressregistration.city }}">Выберите город</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
+                            <input type="submit" name="submit_two" value="Сохранить" class="savebut">
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Улица:</td>
-                        <td>
-                            <input type="text" name="street" placeholder="Полное название улицы" value="{{ user.addressregistration.street }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Дом:</td>
-                        <td>
-                            <input type="text" name="house" placeholder="Номер дома" value="{{ user.addressregistration.house }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Корпус:</td>
-                        <td>
-                            <input type="text" name="corpus" placeholder="Если есть" value="{{ user.addressregistration.corpus }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Квартира:</td>
-                        <td>
-                            <input type="text" name="flat" placeholder="Номер квартиры" value="{{ user.addressregistration.flat }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Индекс:</td>
-                        <td>
-                            <input type="text" name="index" placeholder="XXXXXX" value="{{ user.addressregistration.index }}" required>
-                        </td>
-                    </tr>
-                    <td>
-
-                        <input type="submit" name="submit_one" value="Сохранить" class="savebut">
-</td>
-</form>
-                <form action="{% url "create" %}" method="post">
-                {% csrf_token %}
-                    <tr>
-                        <td colspan="2"><h3>Адрес фактического проживания</h3></td>
-                    </tr>
-                    <tr>
-                        <td>Страна:</td>
-                        <td>
-                            {{ user.addressactual.country }}
-                            <select name="country" id="">
-                                <option value="{{ user.addressactual.country }}">Выберите страну</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Регион:</td>
-                        <td>
-                            {{ user.addressactual.region }}
-                            <select name="region" id="">
-                                <option value="{{ user.addressactual.region }}">Выберите регион</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Город:</td>
-                        <td>
-                            {{ user.addressactual.city }}
-                            <select name="city" id="">
-                                <option value="{{ user.addressactual.city }}">Выберите город</option>
-                                <option value="Россия">Россия</option>
-                                <option value="Украина">Украина</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Улица:</td>
-                        <td>
-                            <input type="text" name="street" placeholder="Полное название улицы" value="{{ user.addressactual.street }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Дом:</td>
-                        <td>
-                            <input type="text" name="house" placeholder="Номер дома" value="{{ user.addressactual.house }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Корпус:</td>
-                        <td>
-                            <input type="text" name="corpus" placeholder="Если есть" value="{{ user.addressactual.corpus }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Квартира:</td>
-                        <td>
-                            <input type="text" name="flat" placeholder="Номер квартиры" value="{{ user.addressactual.flat }}" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Индекс:</td>
-                        <td>
-                            <input type="text" name="index" placeholder="XXXXXX" value="{{ user.addressactual.index }}" required>
-                        </td>
-                    </tr>
-
-                    <td>
-                        <input type="submit" name="submit_two" value="Сохранить" class="savebut">
-                    </td>
                     </form>
                 </tbody>
 
