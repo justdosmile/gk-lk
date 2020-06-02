@@ -32,6 +32,7 @@
                 <table>
                     <thead>
                     <tr>
+                        <td>#</td>
                         <td>Заголовок вопроса</td>
                         <td>Содержание вопроса</td>
                         <td>Дата</td>
@@ -41,14 +42,23 @@
                     {% for feedback in feedback_list %}
                         <tbody>
                         <tr>
+                            <td>{{ feedback.id }}</td>
                             <td>{{ feedback.title }}</td>
-                            <td>{{ feedback.text }}</td>
+                            <td><a data-fancybox data-src="#modal-supp-txt" href="javascript:;">Показать</a></td>
+                            <div style="display: none;" id="modal-supp-txt">
+                                <h2 class="modal-h2">{{ feedback.title }}</h2>
+                                <p>{{ feedback.text }}</p>
+                            </div>
                             <td>{{ feedback.date }}</td>
                             {% if feedback.processing == True %}
-                                <td style="max-width:300px;"><span style="color:green">Обработано</span></td>
+                                <td style="max-width:300px;"><span style="color:green">Обработано</span> <a data-fancybox data-src="#modal-answ" href="javascript:;">(посмотреть ответ)</a></td>
                             {% else %}
                                 <td style="max-width:300px;"><span style="color:blue">В обработке</span></td>
                             {% endif %}
+                            <div style="display: none;" id="modal-answ">
+                                <h2 class="modal-h2">Ответ на запрос #{{ feedback.id }}</h2>
+                                <p>Тело ответа</p>
+                            </div>
                         </tr>
                         </tbody>
                     {% endfor %}

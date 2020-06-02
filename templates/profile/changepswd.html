@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mobile %}
+    <!-- Меню и заголовок для мобилы -->
+    <div class="const mobile-nav">
+        <a href="javascript:;" class="menu-open"></a>
+        <h1>
+            Смена пароля
+            <!-- Дублировал для мобильной версии -->
+        </h1>
+    </div>
+<!-- /Меню и заголовок для мобилы -->
+{% endblock mobile %}
+
+{% block content %}
+    <div class="content">
+        <h1>
+            Смена пароля
+        </h1>
+        <div class="content-body">
+            <table class="profile">
+                <thead><tr><td colspan="2">Безопасность</td></tr></thead>
+                <tbody>
+                    <tr>
+                        <td>Старый пароль:</td>
+                        <td>
+                            <input type="password" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Новый пароль:</td>
+                        <td>
+                            <input type="password" name="" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Повторите пароль:</td>
+                        <td>
+                            <input type="password" name="" id="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+{#            <input type="submit" value="Сохранить" class="savebut">#}
+
+{#                <div class="error"><img src="{% static 'img/information.svg' %}" alt="">{{ message }}</div>#}
+{#            <div class="error"><img src="img/error.svg" alt="">Ошибка сохранения. Обратитесь в <a href="#">поддержку</a></div>#}
+        </div>
+    </div>
+{% endblock content %}

@@ -32,6 +32,7 @@
                 <table>
                     <thead>
                     <tr>
+                        <td>#</td>
                         <td>ФИО</td>
                         <td>Дата вопроса</td>
                         <td>Заголовок вопроса</td>
@@ -43,10 +44,11 @@
                     <tbody>
                     {% for support in object_list %}
                         <tr>
-                            <td><a href="{% url "user_profile" support.user.profile.pk %}">{{ support.user.profile.full_name }}</a></td>
+                            <td>{{ support.id }}</td>
+                            <td><a href="{% url "user_profile" support.user.profile.pk %}">{{ support.user.profile.full_name }}</a><a href="{% url "user_profile" support.user.profile.pk %}" class="edit"></a></td>
                             <td>{{ support.date }}</td>
                             <td>{{ support.title }}</td>
-                            <td>{{ support.text }}</td>
+                            <td><a data-fancybox data-src="#modal-supp-txt" href="javascript:;">Открыть</a></td>
                             {% if support.processing == False %}
                                 <td>В ожидании</td>
                             {% else %}
@@ -54,6 +56,10 @@
                             {% endif %}
                             <td><a href="{{ support.get_absolute_url }}">Посмотреть</a></td>
                         </tr>
+                        <div style="display: none;" id="modal-supp-txt">
+                            <h2 class="modal-h2">{{ support.title }}</h2>
+                            <p>{{ support.text }}</p>
+                        </div>
                     {% endfor %}
                     </tbody>
                 </table>

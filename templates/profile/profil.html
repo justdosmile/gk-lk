@@ -29,7 +29,9 @@
                             <td>ФИО:</td>
                             <td>
                                 {% if perms.profile.administrator %}
-                                    <input type="text" name="full_name" placeholder="ФИО" value="{{ profile.full_name }}">
+                                <div class="editinp">
+                                    {{ profile.full_name }}<div class="edit"><span></span><input type="text" name="full_name" placeholder="ФИО" value="{{ profile.full_name }}"></div>
+                                </div>
                                 {% else %}
                                     {{ profile.full_name }}
                                 {% endif %}
@@ -37,7 +39,11 @@
                         </tr>
                         <tr>
                             <td>Мобильный:</td>
-                            <td>{{ profile.phone }} <a href="#" class="edit"></a></td>
+                            <td>
+                                <div class="editinp">
+                                    {{ profile.phone }}<div class="edit"><span></span><input type="text" name="" placeholder="" value="{{ profile.phone }}"></div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>E-mail:</td>
@@ -48,12 +54,60 @@
                             <td>COOP-007-20203232</td>
                         </tr>
                         <tr>
-                            <td>...</td>
-                            <td>...</td>
+                            <td>Дата регистрации:</td>
+                            <td>27.05.2020</td>
                         </tr>
-                        <td>
-                            <input type="submit" name="submit_profile" value="Сохранить" class="savebut">
-                        </td>
+                        <tr>
+                            <td>Дата вступления:</td>
+                            <td>27.05.2020</td>
+                        </tr>
+                        <tr>
+                            <td>Стоимость жилья:</td>
+                            <td>15 000</td>
+                        </tr>
+                        <tr>
+                            <td>Накоплено личных паевых</td>
+                            <td>15 000</td>
+                        </tr>
+                        <tr>
+                            <td>Номер паспорта</td>
+                            <td>34 09 294949</td>
+                        </tr>
+                        <tr>
+                            <td>Дата рождения</td>
+                            <td>27.05.2020</td>
+                        </tr>
+                        <tr>
+                            <td>Гражданство</td>
+                            <td>РФ</td>
+                        </tr>
+                        <tr>
+                            <td>Код подразделения</td>
+                            <td>294-949</td>
+                        </tr>
+                        <tr>
+                            <td>Дата выдачи паспорта</td>
+                            <td>27.05.2020</td>
+                        </tr>
+                        <tr>
+                            <td>ИНН физ. Лица </td>
+                            <td>3242342341424124124</td>
+                        </tr>
+                        <tr>
+                            <td>Кем выдан </td>
+                            <td>ОУФМС Москвы</td>
+                        </tr>
+                        <tr>
+                            <td>Регион / Город </td>
+                            <td>Москва</td>
+                        </tr>
+                        <tr>
+                            <td>Регион приобретения объекта недвижимости:</td>
+                            <td>Тула</td>
+                        </tr>
+                        <tr>
+                            <td><input type="submit" name="submit_profile" value="Сохранить" class="savebut"></td><td></td>   
+                        </tr>
                     </form>
                     </tbody>
 
@@ -112,11 +166,17 @@
                                     <input type="text" name="index" {% if not registration.index %} placeholder="XXXXXX" {% else %} value="{{ registration.index }}" {% endif %}>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Адрес регистрации полный:</td>
+                                <td>
+                                    Полный адрес
+                                </td>
+                            </tr>
                         {% endfor %}
 
-                        <td>
-                            <input type="submit" name="submit_one" value="Сохранить" class="savebut">
-                        </td>
+                            <tr>
+                                <td><input type="submit" name="submit_one" value="Сохранить" class="savebut"></td><td></td>   
+                            </tr>   
                     </form>
                     <form action="{% url 'update_profile' profile.pk %}" method="post">
                         {% csrf_token %}
@@ -172,10 +232,16 @@
                                     <input type="text" name="index" {% if not actual.index %} placeholder="XXXXXX" {% else %} value="{{ actual.index }}" {% endif %}>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Адрес проживания полный:</td>
+                                <td>
+                                    Полный адрес
+                                </td>
+                            </tr>
                         {% endfor %}
-                        <td>
-                            <input type="submit" name="submit_two" value="Сохранить" class="savebut">
-                        </td>
+                            <tr>
+                                <td><input type="submit" name="submit_two" value="Сохранить" class="savebut"></td><td></td>   
+                            </tr>          
                     </form>
                 </tbody>
 
@@ -186,39 +252,139 @@
                         <td>Образование:</td>
                         <td>
                             <select name="" id="">
-                                <option value="">Высшее</option>
-                                <option value="">Среднее</option>
-                                <option value="">Низшее</option>
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>...</td>
+                        <td>Ученая степень:</td>
                         <td>
-                            ...
-                        </td>
-                    </tr>
-                </tbody>
-                <thead><tr><td colspan="2">Безопасность</td></tr></thead>
-                <tbody>
-                    <tr>
-                        <td>Старый пароль:</td>
-                        <td>
-                            <input type="password" id="">
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Новый пароль:</td>
+                        <td>Тип занятости:</td>
                         <td>
-                            <input type="password" name="" id="">
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
-                        <td>Повторите пароль:</td>
+                        <td>Место работы/учебы:</td>
                         <td>
-                            <input type="password" name="" id="">
+                            <input type="text" name="">
                         </td>
                     </tr>
+                    <tr>
+                        <td>Должность:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Общий стаж работы, лет:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Среднемесячный доход за последние 6 месяцев за вычетом налогов:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Среднемесячный совокупный доход семьи за последние 6 месяцев, руб:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Семейное положение:</td>
+                        <td>
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Дети/внуки:</td>
+                        <td>
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Источник первоначальных взносов:</td>
+                        <td>
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Цель участия в ЖК:</td>
+                        <td>
+                            <select name="" id="">
+                                <option value="">Вариант 1</option>
+                                <option value="">Вариант 2</option>
+                                <option value="">Вариант 3</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Состояние на учете в ПНД и / или других учреждениях:</td>
+                        <td>
+                            <input type="checkbox" name="" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Состоит на учете по улучшению жилищных условий:</td>
+                        <td>
+                            <input type="checkbox" name="" id="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Общая площадь объекта не менее, кв.м.:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Жилая площадь объекта не менее, кв.м:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Площадь кухни не менее, кв.м.:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Этаж:</td>
+                        <td>
+                            <input type="text" name="">
+                        </td>
+                    </tr>
+ 
                 </tbody>
             </table>
 

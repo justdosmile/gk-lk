@@ -22,10 +22,12 @@
         {% include 'include/admin_menu.html' %}
 
         <div class="content-body">
+            <h2>Вопрос</h2>
             <div class="table">
                 <table>
                     <thead>
                     <tr>
+                        <td>#</td>
                         <td>ФИО</td>
                         <td>Дата вопроса</td>
                         <td>Заголовок вопроса</td>
@@ -36,11 +38,12 @@
                     </thead>
                     <tbody>
                     <tr>
+                        <td>{{ single_support.id }}</td>
                         <td>{{ single_support.user.profile.full_name }}</td>
                         <td>{{ single_support.date }}</td>
                         <td>{{ single_support.title }}</td>
-                        <td>{{ single_support.text }}</td>
-                        <td><a href="{{ single_support.image.url }}">Фото</a></td>
+                        <td><a data-fancybox data-src="#modal-supp-txt" href="javascript:;">Открыть</a></td>
+                        <td><a href="{{ single_support.image.url }}" data-fancybox="images" data-caption="{{ single_support.title }}">Фото</a></td>
                         {% if single_support.processing == False %}
                             <td>В ожидании</td>
                         {% else %}
@@ -48,14 +51,19 @@
                         {% endif %}
 
                     </tr>
+                    <div style="display: none;" id="modal-supp-txt">
+                        <h2 class="modal-h2">{{ single_support.title }}</h2>
+                        <p>{{ single_support.text }}</p>
+                    </div>
                     </tbody>
                 </table>
             </div>
-            <br><br>
+            <br><br><h2>История ответов</h2>
             <div class="table">
             <table>
             <thead>
                 <tr>
+                    <td>#</td>
                     <td>ФИО</td>
                     <td>Дата ответа</td>
                     <td>Заголовок ответа</td>
@@ -67,14 +75,19 @@
             <tbody>
                 {% for answer in single_support.reply.all %}
                     <tr>
+                        <td>{{ answer.id }}</td>
                         <td>{{ answer.user.profile.full_name }}</td>
                         <td>{{ answer.data }}</td>
                         <td>{{ single_support.title }}</td>
-                        <td>{{ answer.text }}</td>
+                        <td><a data-fancybox data-src="#modal-answ-txt-{{ answer.id }}" href="javascript:;">Открыть</a></td>
+                        <div style="display: none;" id="modal-answ-txt-{{ answer.id }}">
+                            <h2 class="modal-h2">{{ single_support.title }}</h2>
+                            <p>{{ answer.text }}</p>
+                        </div>
                         {% if not answer.image %}
                             <td>Без вложения</td>
                         {% else %}
-                            <td><a href="{{ answer.image.url }}">Фото</a></td>
+                            <td><a data-fancybox="images" data-caption="{{ single_support.title }}" href="{{ answer.image.url }}">Фото</a></td>
                         {% endif %}
 
                             <td>Отправлено</td>

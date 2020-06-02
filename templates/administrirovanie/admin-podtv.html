@@ -42,7 +42,7 @@
 			<tbody>
             {% for podtv in object_list %}
 				<tr>
-                    <td><a href="{% url "user_profile" podtv.profile.pk %}">{{ podtv.profile.full_name }}</a></td>
+                    <td><a href="{% url "user_profile" podtv.profile.pk %}">{{ podtv.profile.full_name }}</a><a href="{% url "user_profile" podtv.profile.pk %}" class="edit"></a></td>
 					<td>{{ podtv.groups.all.0 }}</td>
 					<td>Вступительный взнос</td>
 					<td>11:44 29.04.2020</td>

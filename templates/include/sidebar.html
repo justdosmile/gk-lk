@@ -85,5 +85,7 @@
         {% url 'update_post' post.slug as update_post %}
         {% url 'delete_post' post.slug as delete_post %}
         <li {% if news|active:request or single_post|active:request or add_post|active:request  or update_post|active:request or delete_post|active:request %} class="active" {% endif %}><a href="{% url 'news' %}">Новости</a></li>
+        <li><a href="">Смена пароля</a></li>
+    
     </ul>
 </nav>

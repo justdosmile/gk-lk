@@ -13,4 +13,7 @@
     <li {% if calculated_list|active:request %} class="active" {% endif %}><a href="{% url 'calculated_list' %}">Полностью рассчитанные</a></li>
     {% url 'debtor_list' as debtor_list %}
     <li {% if debtor_list|active:request %} class="active" {% endif %}><a href="{% url 'debtor_list' %}">Должники</a></li>
+    
+    <li><a href="">Кандидат в члены</a></li>
+    <li><a href="">В процессе накопления</a></li>
 </ul>

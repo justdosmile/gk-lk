@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block mobile %}
+    <!-- Меню и заголовок для мобилы -->
+    <div class="const mobile-nav">
+        <a href="javascript:;" class="menu-open"></a>
+        <h1>
+            В процессе накопления
+            <!-- Дублировал для мобильной версии -->
+        </h1>
+    </div>
+<!-- /Меню и заголовок для мобилы -->
+{% endblock mobile %}
+
+{% block content %}
+
+    <div class="content">
+    <h1>
+        В процессе накопления
+    </h1>
+
+        {% include 'include/turn_menu.html' %}
+
+        <div class="content-body">
+            <form method="get" action="{% url 'turn_search' %}" class="search-inp">
+                <input type="text" placeholder="Введите ФИО члена" name="deal">
+                <input type="submit" value="" class="searchbut">
+            </form>
+            <table>
+                <thead>
+                <tr>
+                    <td>ФИО</td>
+                    <td>Дата регистрации</td>
+                    <td>Дата активации</td>
+                    <td>Дата покупки объекта</td>
+                    <td>Срок рассрочки</td>
+                    <td>Процент рассрочки</td>
+                </tr>
+                </thead>
+                {% for member in object_list %}
+                    <tbody>
+                    <tr>
+                        <td><a href="{% url "user_profile" member.pk %}">{{ member.full_name }}</a></td>
+                        <td>{{ member.user.date_joined }}</td>
+                        <td>{{ member.date_joined }}</td>
+                        <td>{{ member.date_acquisition }}</td>
+                        <td>{{ member.installment_period }}</td>
+                        <td>{{ member.percent_installment }}</td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+
+
+            {% include 'include/pagination.html' %}
+
+
+    </div>
+{% endblock %}

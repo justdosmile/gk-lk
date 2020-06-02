@@ -42,7 +42,7 @@
 			<tbody>
             {% for verif in object_list %}
 				<tr>
-                    <td><a href="{% url "user_profile" verif.profile.pk %}">{{ verif.profile.full_name }}</a></td>
+                    <td><a href="{% url "user_profile" verif.profile.pk %}">{{ verif.profile.full_name }}</a><a href="{% url "user_profile" verif.profile.pk %}" class="edit"></a></td>
 					<td>{{ verif.groups.all.0 }}</td>
 					<td>Документ на вступление</td>
 					<td>В ожидании</td>
