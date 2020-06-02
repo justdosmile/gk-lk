@@ -214,6 +214,11 @@ a.exit-link{
 
 @media screen and (max-width: 450px) {
 
+	.modal-h2{
+		min-width: 200px;
+		text-align: center;
+	}
+
 .calcul-form > div > label:first-child{
 	width: 100%;
 	margin-bottom: 20px;

@@ -721,6 +721,10 @@ table.profile tr td:last-child{
 	font-weight: 500;
 }
 
+table.profile tr td:first-child{
+	width: 50%;
+}
+
 table.profile tr td{
 	vertical-align: middle;
 }
@@ -748,10 +752,16 @@ select{
 	font-size: 13px;
 	border:1px dashed #96c93d;
 	outline: none;
+	min-width: 200px;
+	max-width: 100%;
 }
 
 table.profile input{
 	margin-bottom: 0 !important;
+}
+
+table.profile input.savebut{
+	margin-top: 0;
 }
 
 a.edit{
@@ -768,7 +778,6 @@ a.edit:hover{
 	background: url(/static/img/edit-h.svg) no-repeat 50% 50% #96c93d;
 	background-size: 10px;
 }
-
 
 .const.autoriz{
 	display: flex;
@@ -952,4 +961,72 @@ h2, .news-block h2{
 
 .const.autoriz.registr{
 	height: 100%;
+}
+
+.doc-inp{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.doc-inp .savebut{
+	margin-top: 0;
+}
+
+.doc-inp .file-inp label{
+	margin-top: 0;
+	margin-bottom: 0;
+	padding:9px 15px;
+}
+
+.modal-h2{
+	min-width: 400px;
+	text-align: center;
+}
+
+div.edit{
+display: inline-flex;
+position: relative;
+bottom: -3px;
+left:4px;
+background: #efefef;
+align-items: center;
+border-radius: 4px;
+overflow: hidden;
+width: 24px;
+transition: 0.2s;
+}
+
+div.edit span{
+background: url(/static/img/edit.svg) no-repeat 50% 50% ;
+background-size: 10px;
+width: 16px;
+min-width: 16px;
+border-radius: 4px;
+height:16px;
+margin-left: 4px;
+margin-right: 4px;
+display: inline-block;	
+cursor: pointer;
+}
+
+div.edit:hover span{
+	transform: scale(1.1);
+}
+
+div.edit.active{
+	width: 240px;
+	margin-left: 10px;
+}
+
+div.edit input[type=text]{
+	display: inline-block;
+	border:0;
+    margin-bottom: 0;
+    background: transparent !important;
+    border-radius: 0;
+    padding: 5px 0;
+	transition: 0.2s;
+	width: 100%;
+	transition: 0.2s;
+	margin-left: 10px;
 }

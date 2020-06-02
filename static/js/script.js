@@ -11,6 +11,10 @@ jQuery(document).ready(function () {
 		jQuery('main nav').toggleClass('active');
 	});
 
+	jQuery('div.edit span').click(function (e) {
+		jQuery(this).closest('div.edit').toggleClass('active');
+	});
+
 	
 	jQuery('li ul li.active').each(function() {
 		jQuery(this).parent('ul').slideToggle(300);
